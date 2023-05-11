@@ -1,0 +1,218 @@
+
+zelen@LAPTOP-Q4T3BVIM MINGW64 ~/Desktop (master)
+$ mkdir dir_1
+
+zelen@LAPTOP-Q4T3BVIM MINGW64 ~/Desktop (master)
+$ cd dir_1/
+
+zelen@LAPTOP-Q4T3BVIM MINGW64 ~/Desktop/dir_1 (master)
+$ mkdir inner_dir_1
+
+zelen@LAPTOP-Q4T3BVIM MINGW64 ~/Desktop/dir_1 (master)
+$ pwd
+/c/Users/zelen/Desktop/dir_1
+
+zelen@LAPTOP-Q4T3BVIM MINGW64 ~/Desktop/dir_1 (master)
+$ touch tf_1.txt
+
+zelen@LAPTOP-Q4T3BVIM MINGW64 ~/Desktop/dir_1 (master)
+$ cat > tf_2.txt
+the first 1
+the second 2
+the third 3
+
+
+zelen@LAPTOP-Q4T3BVIM MINGW64 ~/Desktop/dir_1 (master)
+$ cd inner_dir_1/
+
+zelen@LAPTOP-Q4T3BVIM MINGW64 ~/Desktop/dir_1/inner_dir_1 (master)
+$ cat > tf_3.txt
+Hello world
+i love my wife
+
+
+zelen@LAPTOP-Q4T3BVIM MINGW64 ~/Desktop/dir_1/inner_dir_1 (master)
+$ cat >> tf_3.txt
+the second 2
+the sec 2
+
+
+zelen@LAPTOP-Q4T3BVIM MINGW64 ~/Desktop/dir_1/inner_dir_1 (master)
+$ cat >> ../tf_2.txt
+the sec 3
+
+
+zelen@LAPTOP-Q4T3BVIM MINGW64 ~/Desktop/dir_1/inner_dir_1 (master)
+$ cat >> tf_3.txt
+the SeCoNd 2
+
+
+zelen@LAPTOP-Q4T3BVIM MINGW64 ~/Desktop/dir_1/inner_dir_1 (master)
+$ cat >> ../tf_2.txt
+the seConD 2
+
+
+zelen@LAPTOP-Q4T3BVIM MINGW64 ~/Desktop/dir_1/inner_dir_1 (master)
+$ seq 15 | cat > tf_4.txt
+
+zelen@LAPTOP-Q4T3BVIM MINGW64 ~/Desktop/dir_1/inner_dir_1 (master)
+$ seq 13 | cat > tf_5.txt
+
+zelen@LAPTOP-Q4T3BVIM MINGW64 ~/Desktop/dir_1/inner_dir_1 (master)
+$ ls -la
+total 3
+drwxr-xr-x 1 zelen 197609  0 May 11 21:29 ./
+drwxr-xr-x 1 zelen 197609  0 May 11 21:23 ../
+-rw-r--r-- 1 zelen 197609 63 May 11 21:28 tf_3.txt
+-rw-r--r-- 1 zelen 197609 36 May 11 21:29 tf_4.txt
+-rw-r--r-- 1 zelen 197609 30 May 11 21:29 tf_5.txt
+
+zelen@LAPTOP-Q4T3BVIM MINGW64 ~/Desktop/dir_1/inner_dir_1 (master)
+$ cd ..
+
+zelen@LAPTOP-Q4T3BVIM MINGW64 ~/Desktop/dir_1 (master)
+$ cat inner_dir_1/tf_3.txt
+Hello world
+i love my wife
+the second 2
+the sec 2
+the SeCoNd 2
+
+zelen@LAPTOP-Q4T3BVIM MINGW64 ~/Desktop/dir_1 (master)
+$ find -name tf_4.txt
+./inner_dir_1/tf_4.txt
+
+zelen@LAPTOP-Q4T3BVIM MINGW64 ~/Desktop/dir_1 (master)
+$ > inner_dir_1/tf_4.txt
+
+zelen@LAPTOP-Q4T3BVIM MINGW64 ~/Desktop/dir_1 (master)
+$ find -name "*tf*"
+./inner_dir_1/tf_3.txt
+./inner_dir_1/tf_4.txt
+./inner_dir_1/tf_5.txt
+./tf_1.txt
+./tf_2.txt
+
+zelen@LAPTOP-Q4T3BVIM MINGW64 ~/Desktop/dir_1 (master)
+$ find -iname "*tf*"
+./inner_dir_1/tf_3.txt
+./inner_dir_1/tf_4.txt
+./inner_dir_1/tf_5.txt
+./tf_1.txt
+./tf_2.txt
+
+zelen@LAPTOP-Q4T3BVIM MINGW64 ~/Desktop/dir_1 (master)
+$ grep sec *
+grep: inner_dir_1: Is a directory
+tf_2.txt:the second 2
+tf_2.txt:the sec 3
+
+zelen@LAPTOP-Q4T3BVIM MINGW64 ~/Desktop/dir_1 (master)
+$ grep -i sec *
+grep: inner_dir_1: Is a directory
+tf_2.txt:the second 2
+tf_2.txt:the sec 3
+tf_2.txt:the seConD 2
+
+zelen@LAPTOP-Q4T3BVIM MINGW64 ~/Desktop/dir_1 (master)
+$ grep -iw sec *
+grep: inner_dir_1: Is a directory
+tf_2.txt:the sec 3
+
+zelen@LAPTOP-Q4T3BVIM MINGW64 ~/Desktop/dir_1 (master)
+$ grep -w sec *
+grep: inner_dir_1: Is a directory
+tf_2.txt:the sec 3
+
+zelen@LAPTOP-Q4T3BVIM MINGW64 ~/Desktop/dir_1 (master)
+$ grep  second *
+grep: inner_dir_1: Is a directory
+tf_2.txt:the second 2
+
+zelen@LAPTOP-Q4T3BVIM MINGW64 ~/Desktop/dir_1 (master)
+$ grep -i second *
+grep: inner_dir_1: Is a directory
+tf_2.txt:the second 2
+tf_2.txt:the seConD 2
+
+
+zelen@LAPTOP-Q4T3BVIM MINGW64 ~/Desktop/dir_1 (master)
+$ grep -r second */.
+inner_dir_1/./tf_3.txt:the second 2
+
+zelen@LAPTOP-Q4T3BVIM MINGW64 ~/Desktop/dir_1 (master)
+$ grep -l second * | xargs realpath
+grep: inner_dir_1: Is a directory
+/c/Users/zelen/Desktop/dir_1/tf_2.txt
+
+zelen@LAPTOP-Q4T3BVIM MINGW64 ~/Desktop/dir_1 (master)
+$ grep -vrn second
+inner_dir_1/tf_3.txt:1:Hello world
+inner_dir_1/tf_3.txt:2:i love my wife
+inner_dir_1/tf_3.txt:4:the sec 2
+inner_dir_1/tf_3.txt:5:the SeCoNd 2
+inner_dir_1/tf_5.txt:1:1
+inner_dir_1/tf_5.txt:2:2
+inner_dir_1/tf_5.txt:3:3
+inner_dir_1/tf_5.txt:4:4
+inner_dir_1/tf_5.txt:5:5
+inner_dir_1/tf_5.txt:6:6
+inner_dir_1/tf_5.txt:7:7
+inner_dir_1/tf_5.txt:8:8
+inner_dir_1/tf_5.txt:9:9
+inner_dir_1/tf_5.txt:10:10
+inner_dir_1/tf_5.txt:11:11
+inner_dir_1/tf_5.txt:12:12
+inner_dir_1/tf_5.txt:13:13
+tf_2.txt:1:the first 1
+tf_2.txt:3:the third 3
+tf_2.txt:4:the sec 3
+tf_2.txt:5:the seConD 2
+
+zelen@LAPTOP-Q4T3BVIM MINGW64 ~/Desktop/dir_1 (master)
+$ grep -vrl second
+inner_dir_1/tf_3.txt
+inner_dir_1/tf_5.txt
+tf_2.txt
+
+zelen@LAPTOP-Q4T3BVIM MINGW64 ~/Desktop/dir_1 (master)
+$ tail -4 tf_2.txt
+the second 2
+the third 3
+the sec 3
+the seConD 2
+
+zelen@LAPTOP-Q4T3BVIM MINGW64 ~/Desktop/dir_1 (master)
+$ head -4 tf_2.txt
+the first 1
+the second 2
+the third 3
+the sec 3
+
+zelen@LAPTOP-Q4T3BVIM MINGW64 ~/Desktop/dir_1 (master)
+$ mkdir inner_dir_2 && cat > inner_dir_2/tf_6.txt
+Italy
+Usa
+spain
+Tyrkie
+
+
+zelen@LAPTOP-Q4T3BVIM MINGW64 ~/Desktop/dir_1 (master)
+$ grep -wrl sec | xargs mv -t inner_dir_2
+
+zelen@LAPTOP-Q4T3BVIM MINGW64 ~/Desktop/dir_1 (master)
+$ grep -wrl sec | xargs cp -t inner_dir_1
+
+zelen@LAPTOP-Q4T3BVIM MINGW64 ~/Desktop/dir_1 (master)
+$ grep -rh sec >> new.txt
+grep: input file ‘new.txt’ is also the output
+
+zelen@LAPTOP-Q4T3BVIM MINGW64 ~/Desktop/dir_1 (master)
+$ grep -rlw sec | xargs rm
+
+zelen@LAPTOP-Q4T3BVIM MINGW64 ~/Desktop/dir_1 (master)
+$ echo "Good job"
+Good job
+
+zelen@LAPTOP-Q4T3BVIM MINGW64 ~/Desktop/dir_1 (master)
+$
